@@ -1,0 +1,43 @@
+RAG TEST DOCUMENT
+
+This document is created for testing Retrieval-Augmented Generation (RAG) systems. It contains multiple sections with factual, descriptive, and instructional content. The text is suitable for chunking, embedding, indexing, and retrieval in a vector database.
+
+SECTION 1: INTRODUCTION TO RAG
+
+Retrieval-Augmented Generation (RAG) is a technique that combines information retrieval with text generation. Instead of relying only on a language model’s internal parameters, a RAG system retrieves relevant documents from an external knowledge base and uses those documents as context when generating answers. This approach improves factual accuracy and reduces hallucinations.
+
+SECTION 2: KEY COMPONENTS OF A RAG SYSTEM
+
+A typical RAG system includes the following components:
+
+1. Document Store
+The document store holds raw text data such as articles, manuals, FAQs, or notes. These documents are the source of truth for retrieval.
+
+2. Embedding Model
+An embedding model converts text chunks into numerical vector representations that capture semantic meaning.
+
+3. Vector Database
+A vector database stores embeddings and allows efficient similarity search to find relevant chunks for a given query.
+
+4. Generator Model
+The generator model produces the final answer by combining the user query with the retrieved contextual information.
+
+SECTION 3: SAMPLE FACTS FOR RETRIEVAL
+
+The capital of France is Paris.
+Water freezes at 0 degrees Celsius under standard atmospheric pressure.
+The Earth revolves around the Sun once every year.
+Python is a widely used programming language for artificial intelligence and data science.
+
+SECTION 4: SAMPLE QUESTIONS THIS DOCUMENT CAN ANSWER
+
+What is Retrieval-Augmented Generation?
+What are the main components of a RAG system?
+Why is RAG useful for improving answer accuracy?
+What does a vector database do in a RAG pipeline?
+
+SECTION 5: USAGE NOTES
+
+This document can be split into smaller text chunks for embedding. Each section is intentionally self-contained to support accurate retrieval. The content is designed for testing semantic search, context ranking, and grounded answer generation.
+
+END OF DOCUMENT
