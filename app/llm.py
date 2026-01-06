@@ -11,9 +11,7 @@ if not API_KEY:
 
 
 def generate_answer(question: str, context_chunks: list) -> str:
-    """
-    Generate an answer strictly from retrieved context using Gemini.
-    """
+
     if not context_chunks:
         return "I don’t know based on the provided context."
 

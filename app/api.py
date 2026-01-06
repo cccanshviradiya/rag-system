@@ -14,10 +14,7 @@ router = APIRouter()
 
 @router.post("/ingest")
 async def ingest_document(file: UploadFile = File(...)):
-    """
-    Ingest a plain text document, chunk it, embed it,
-    and store results in the database.
-    """
+
     if not file.filename.endswith(".txt"):
         raise HTTPException(status_code=400, detail="Only .txt files allowed")
 
@@ -55,9 +52,7 @@ class QuestionRequest(BaseModel):
 
 @router.post("/ask")
 def ask_question(request: QuestionRequest):
-    """
-    Answer a question using retrieval-augmented generation.
-    """
+
     question = request.question
     top_chunks = retrieve_top_k_chunks(question, top_k=3)
 
@@ -91,9 +86,7 @@ def ask_question(request: QuestionRequest):
 
 @router.get("/health")
 def health():
-    """
-    Health check endpoint.
-    """
+
     try:
         conn = get_connection()
         conn.close()

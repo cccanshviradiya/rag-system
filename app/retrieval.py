@@ -5,10 +5,7 @@ from app.embedding import embed_text, cosine_similarity
 
 
 def retrieve_top_k_chunks(question: str, top_k: int = 3) -> list[dict]:
-    """
-    Retrieve top-k semantically relevant chunks for a given question.
-    """
-
+    
     question_embedding = embed_text(question)
 
     conn = get_connection()

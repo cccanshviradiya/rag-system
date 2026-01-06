@@ -1,8 +1,5 @@
 def compute_confidence(retrieved_chunks: list) -> float:
-    """
-    Compute confidence based on normalized average cosine similarity
-    of retrieved chunks.
-    """
+
     if not retrieved_chunks:
         return 0.0
 

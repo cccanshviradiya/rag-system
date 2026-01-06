@@ -6,16 +6,12 @@ model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
 
 
 def embed_text(text: str) -> np.ndarray:
-    """
-    Convert input text into an embedding vector.
-    """
+
     return model.encode(text)
 
 
 def cosine_similarity(a: np.ndarray, b: np.ndarray) -> float:
-    """
-    Compute cosine similarity between two vectors.
-    """
+
     a = np.asarray(a)
     b = np.asarray(b)
 

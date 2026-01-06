@@ -4,9 +4,7 @@ MAX_CHARS = 500
 
 
 def semantic_chunk(text: str) -> list[str]:
-    """
-    Split text into semantic chunks using paragraphs and sentence boundaries.
-    """
+
     chunks = []
 
     for para in text.split("\n\n"):
