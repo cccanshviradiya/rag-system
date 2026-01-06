@@ -15,19 +15,50 @@ The solution strictly follows the given constraints:
 
 ## System Architecture
 
-Text File (.txt)
-   ↓
-Semantic Chunking
-   ↓
-Embedding (Hugging Face)
-   ↓
-SQLite Storage
-   ↓
-Semantic Retrieval (Cosine Similarity)
-   ↓
-LLM Prompt (Context-Only)
-   ↓
-Answer + Evidence + Confidence
++--------------------+
+|   Client / User    |
+| (API Consumer)     |
++----------+---------+
+           |
+           v
++--------------------+
+|    FastAPI Layer   |
+|  (/ingest, /ask)   |
++----------+---------+
+           |
+           v
++--------------------+
+|  Document Ingestion|
+|  - Semantic Chunk  |
+|  - Embedding       |
++----------+---------+
+           |
+           v
++--------------------+
+|  SQLite Database   |
+|  - Chunks          |
+|  - Embeddings      |
++----------+---------+
+           |
+           v
++--------------------+
+| Retrieval Engine   |
+| - Query Embedding  |
+| - Cosine Similarity|
++----------+---------+
+           |
+           v
++--------------------+
+|   LLM (Gemini)     |
+| Context-Only Prompt|
++----------+---------+
+           |
+           v
++--------------------+
+| Answer + Evidence  |
+| + Confidence Score |
++--------------------+
+
 
 ---
 
