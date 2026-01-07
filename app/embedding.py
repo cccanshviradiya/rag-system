@@ -1,13 +1,22 @@
 import numpy as np
 from sentence_transformers import SentenceTransformer
 
-# Load embedding model once at startup
-model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
+from sentence_transformers import SentenceTransformer
+import numpy as np
+
+# Load once
+model = SentenceTransformer("intfloat/e5-small-v2")
 
 
-def embed_text(text: str) -> np.ndarray:
-
-    return model.encode(text)
+def embed_text(text: str, is_query: bool = False) -> np.ndarray:
+    """
+    E5 requires prefixes:
+    - 'query:' for questions
+    - 'passage:' for document chunks
+    """
+    prefix = "query: " if is_query else "passage: "
+    embedding = model.encode(prefix + text, normalize_embeddings=True)
+    return embedding
 
 
 def cosine_similarity(a: np.ndarray, b: np.ndarray) -> float:

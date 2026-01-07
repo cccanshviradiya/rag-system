@@ -4,9 +4,9 @@ from app.db import get_connection
 from app.embedding import embed_text, cosine_similarity
 
 
-def retrieve_top_k_chunks(question: str, top_k: int = 3) -> list[dict]:
+def retrieve_top_k_chunks(question: str, is_query=True, top_k: int = 3) -> list[dict]:
     
-    question_embedding = embed_text(question)
+    question_embedding = embed_text(question, is_query=is_query)
 
     conn = get_connection()
     cursor = conn.cursor()

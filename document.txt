@@ -40,4 +40,22 @@ SECTION 5: USAGE NOTES
 
 This document can be split into smaller text chunks for embedding. Each section is intentionally self-contained to support accurate retrieval. The content is designed for testing semantic search, context ranking, and grounded answer generation.
 
+
+Artificial Intelligence (AI) and Machine Learning (ML) are closely related fields of computer science that focus on building systems capable of performing tasks that typically require human intelligence.
+
+Artificial Intelligence is a broad concept that includes reasoning, problem-solving, perception, natural language understanding, and decision-making. AI systems can be rule-based, symbolic, or data-driven. Early AI systems relied heavily on hand-crafted rules and expert knowledge.
+
+Machine Learning is a subset of AI that enables systems to learn patterns from data without being explicitly programmed. Instead of following fixed rules, ML models improve their performance as they are exposed to more data. This makes ML particularly effective for tasks such as image recognition, speech recognition, and recommendation systems.
+
+Supervised learning is a common machine learning paradigm where models are trained on labeled data. Examples include classification tasks like spam detection and regression tasks such as predicting house prices. Common supervised learning algorithms include linear regression, logistic regression, support vector machines, and neural networks.
+
+Unsupervised learning focuses on discovering hidden patterns in unlabeled data. Clustering algorithms such as K-means and hierarchical clustering are widely used to group similar data points. Dimensionality reduction techniques like Principal Component Analysis (PCA) help simplify high-dimensional data.
+
+Deep Learning is a specialized area of machine learning that uses neural networks with many layers. These deep neural networks have achieved state-of-the-art performance in computer vision, natural language processing, and speech synthesis. Popular architectures include Convolutional Neural Networks (CNNs), Recurrent Neural Networks (RNNs), and Transformers.
+
+In recent years, large language models (LLMs) have become a major breakthrough in AI. These models are trained on massive text datasets and can generate human-like text, answer questions, and assist with coding and reasoning tasks. LLMs are commonly used in chatbots, search engines, and retrieval-augmented generation (RAG) systems.
+
+Despite rapid advancements, AI and ML systems face challenges such as bias, lack of interpretability, data privacy concerns, and high computational costs. Responsible AI development emphasizes fairness, transparency, and accountability in model design and deployment.
+
+
 END OF DOCUMENT

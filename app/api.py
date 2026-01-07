@@ -1,6 +1,7 @@
 from fastapi import APIRouter, UploadFile, File, HTTPException
 from pydantic import BaseModel
 import pickle
+from typing import List
 
 from app.chunking import semantic_chunk
 from app.db import get_connection
@@ -11,50 +12,64 @@ from app.confidence import compute_confidence
 
 router = APIRouter()
 
-
 @router.post("/ingest")
-async def ingest_document(file: UploadFile = File(...)):
-
-    if not file.filename.endswith(".txt"):
-        raise HTTPException(status_code=400, detail="Only .txt files allowed")
-
-    text = (await file.read()).decode("utf-8")
-    chunks = semantic_chunk(text)
+async def ingest_documents(files: List[UploadFile] = File(...)):
 
     conn = get_connection()
     cursor = conn.cursor()
 
-    for idx, chunk in enumerate(chunks):
-        embedding = embed_text(chunk)
-        embedding_blob = pickle.dumps(embedding)
+    total_chunks = 0
+    ingested_files = []
 
-        cursor.execute(
-            """
-            INSERT INTO documents (document_name, chunk_id, chunk_text, embedding)
-            VALUES (?, ?, ?, ?)
-            """,
-            (file.filename, idx, chunk, embedding_blob),
-        )
+    for file in files:
+        if not file.filename.endswith(".txt"):
+            conn.close()
+            raise HTTPException(
+                status_code=400,
+                detail="Only .txt files allowed"
+            )
+
+        text = (await file.read()).decode("utf-8")
+        chunks = semantic_chunk(text)
+
+        for idx, chunk in enumerate(chunks):
+            embedding = embed_text(chunk)
+            embedding_blob = pickle.dumps(embedding)
+
+            cursor.execute(
+                """
+                INSERT INTO documents (document_name, chunk_id, chunk_text, embedding)
+                VALUES (?, ?, ?, ?)
+                """,
+                (file.filename, idx, chunk, embedding_blob),
+            )
+
+        total_chunks += len(chunks)
+        ingested_files.append(file.filename)
 
     conn.commit()
     conn.close()
 
     return {
-        "document": file.filename,
-        "chunks_stored": len(chunks),
+        "documents": ingested_files,
+        "total_chunks_stored": total_chunks,
         "status": "success",
     }
 
 
+
 class QuestionRequest(BaseModel):
     question: str
+    top_k: int | None = None 
 
 
 @router.post("/ask")
 def ask_question(request: QuestionRequest):
 
     question = request.question
-    top_chunks = retrieve_top_k_chunks(question, top_k=3)
+    top_k = request.top_k or 5
+    top_k = max(1, min(top_k, 20))
+    top_chunks = retrieve_top_k_chunks(question, top_k=top_k)
 
     if not top_chunks:
         return {
