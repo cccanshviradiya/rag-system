@@ -77,7 +77,7 @@ This approach preserves semantic meaning better than line-based or fixed-length 
 
 ## Embedding Choice
 
-- **Model:** `sentence-transformers/all-MiniLM-L6-v2`
+- **Model:** `intfloat/e5-small-v2`
 - **Source:** Hugging Face
 
 ### Reasoning
@@ -114,7 +114,7 @@ Embeddings are generated once per chunk and stored locally.
 - All stored chunk embeddings are loaded from SQLite
 - Cosine similarity is computed manually using NumPy
 - Chunks are ranked by similarity
-- Top-k (default = 3) chunks are selected
+- Top-k (default = 5) chunks are selected
 
 No approximate search, indexing library, or vector database is used.
 
